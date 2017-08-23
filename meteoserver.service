@@ -1,0 +1,13 @@
+[Unit]
+Description=WXT Meteo server
+After=syslog.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/
+ExecStart=/usr/local/bin/server.py
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

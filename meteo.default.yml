@@ -1,0 +1,45 @@
+# Configuration file for meteo logger and server
+
+name: 'ExWi'
+
+# Serial port file of meteo station.
+# If value is 'auto' then search for meteo station.
+serial: 'auto'  # /dev/ttyS0
+baudrate: 19200
+
+# Setup for meteo station
+# setup: []  # No setup
+# Each setting is tested by querying current state and sending the settings if needed.
+setup:
+  # Settings, page 60
+  - '0XU,A=0,M=P,T=0,C=2,I=0,B=19200,D=8,P=N,S=1,L=20'
+  # Wind, page 107
+  - '0WU,R=11111111&11111111,I=60,A=60,G=1,U=M,D=0,N=W,F=4'
+  # Temperature, page 113
+  - '0TU,R=11111111&11111111,I=60,P=H,T=C,N=T'
+  # Precipitation, page 117
+  - '0RU,R=11111111&11111111,I=60,U=M,S=M,M=T,Z=M'
+
+# Poll interval in seconds.
+interval: 60
+
+# Where to put the log files
+target: '/home/pi/meteo/'
+
+
+# Maximum number of daily log files to keep.
+# Typical size for 60 s interval is 80 kB
+max_files: 10000
+
+# Logging directly to database
+database:
+  use_database: No
+  # See: http://docs.sqlalchemy.org/en/latest/core/engines.html
+  url: 'mysql+mysqlconnector://user:password@server/database'
+  table: 'table_name'  # Will get created automatically
+
+
+server:
+  host: '0.0.0.0'
+  port: 8080
+  debug: no

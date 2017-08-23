@@ -1,0 +1,2 @@
+recursive-include meteo/templates *
+recursive-include meteo/static *

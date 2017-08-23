@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{name}} Meteo station</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/meteoserver.css') }}">
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">{{name}} Meteo station</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#current">Current</a></li>
+                <li><a href="#last_day">Last 24 hours</a></li>
+                <li><a href="#last_week">Last Week</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}{% endblock %}
+
+    <a id="about"></a>
+    <h2>About</h2>
+
+    <p>Also see <a href="/plots">same page with plots.</a> Generating plots can delay other API requests.</p>
+
+    <p>API endpoints:</p>
+    <ul>
+        <li><a href="/latest">/latest</a>: Last measurement from meteostation.</li>
+        <li><a href="/latest/600">/latest/{N}</a>: Average over last N seconds.</li>
+    </ul>
+
+    <p>Powered by Flask, matplotlib, pandas and numpy.</p>
+</div>
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+</body>
+
+</html>

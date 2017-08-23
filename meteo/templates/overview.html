@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<a id="current"></a>
+<h2>Current values</h2>
+
+
+<table class="table table-sm table-nonfluid">
+    <tr>
+        <td><span class="name">Time</span></td>
+        <td><span class="value">{{ latest.date }} {{ latest.time }} UTC</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Temperature</span></td>
+        <td><span class="value">{{ "{:.1f}".format(latest.air_temperature) }}&nbsp;{{ units.air_temperature }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Humidity</span></td>
+        <td><span class="value">{{ "{:.1f}".format(latest.rel_humidity) }}&nbsp;{{ units.rel_humidity }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Pressure</span></td>
+        <td><span class="value">{{ "{:.1f}".format(latest.air_pressure) }}&nbsp;{{ units.air_pressure }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Wind</span></td>
+        <td><span class="value">{{ "{:.1f}".format(latest.wind_speed_avg) }}&nbsp;{{ units.wind_speed }}</span></td>
+    </tr>
+</table>
+
+
+
+<a id="last_day"></a>
+<h2>Last 24 hours</h2>
+
+
+<table class="table table-sm">
+    <tr>
+        <th></th>
+        <th>Average</th>
+        <th>Minimum</th>
+        <th>Maximum</th>
+    </tr>
+    <tr>
+        <td><span class="name">Temperature</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.air_temperature) }}&nbsp;{{ units.air_temperature }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.air_temperature_min) }}&nbsp;{{ units.air_temperature }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.air_temperature_max) }}&nbsp;{{ units.air_temperature }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Humidity</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.rel_humidity) }}&nbsp;{{ units.rel_humidity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.rel_humidity_min) }}&nbsp;{{ units.rel_humidity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.rel_humidity_max) }}&nbsp;{{ units.rel_humidity }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Pressure</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.air_pressure) }}&nbsp;{{ units.air_pressure }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.air_pressure_min) }}&nbsp;{{ units.air_pressure }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.air_pressure_max) }}&nbsp;{{ units.air_pressure }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Wind</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.wind_speed_avg) }}&nbsp;{{ units.wind_speed }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.wind_speed_min) }}&nbsp;{{ units.wind_speed }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.wind_speed_max) }}&nbsp;{{ units.wind_speed }}</span></td>
+    </tr>
+</table>
+
+
+{% if show_plots %}
+    <a href="#plots_day" data-toggle="collapse">Show / Hide Plots</a>
+
+    <div id="plots_day" class="plot_panel collapse">
+        <div class="plot">
+            <img src="{{ url_for('plot_day', column='air_temperature')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_day', column='rel_humidity')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_day', column='air_pressure')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_day', column='wind_speed')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_day', column='wind_dir')  }}">
+        </div>
+    </div>
+{% endif %}
+
+
+
+<a id="last_week"></a>
+<h2>Last week</h2>
+
+
+<table class="table table-sm">
+    <tr>
+        <th></th>
+        <th>Average</th>
+        <th>Minimum</th>
+        <th>Maximum</th>
+    </tr>
+    <tr>
+        <td><span class="name">Temperature</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.air_temperature) }}&nbsp;{{ units.air_temperature }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.air_temperature_min) }}&nbsp;{{ units.air_temperature }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.air_temperature_max) }}&nbsp;{{ units.air_temperature }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Humidity</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.rel_humidity) }}&nbsp;{{ units.rel_humidity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.rel_humidity_min) }}&nbsp;{{ units.rel_humidity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.rel_humidity_max) }}&nbsp;{{ units.rel_humidity }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Pressure</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.air_pressure) }}&nbsp;{{ units.air_pressure }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.air_pressure_min) }}&nbsp;{{ units.air_pressure }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.air_pressure_max) }}&nbsp;{{ units.air_pressure }}</span></td>
+    </tr>
+    <tr>
+        <td><span class="name">Wind</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.wind_speed_avg) }}&nbsp;{{ units.wind_speed }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.wind_speed_min) }}&nbsp;{{ units.wind_speed }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.wind_speed_max) }}&nbsp;{{ units.wind_speed }}</span></td>
+    </tr>
+</table>
+
+
+{% if show_plots %}
+    <a href="#plots_week" data-toggle="collapse">Show / Hide Plots</a>
+
+    <div id="plots_week" class="plot_panel collapse">
+        <div class="plot">
+            <img src="{{ url_for('plot_week', column='air_temperature')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_week', column='rel_humidity')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_week', column='air_pressure')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_week', column='wind_speed')  }}">
+        </div>
+        <div class="plot">
+            <img src="{{ url_for('plot_week', column='wind_dir')  }}">
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

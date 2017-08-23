@@ -1,0 +1,42 @@
+
+
+
+.name {
+    font-weight: bold;
+}
+
+ul.current_values {
+    list-style-type: none;
+}
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.container {
+  margin: auto;
+  max-width: 800px;
+  min-width: 200pt;
+  width: 100%;
+}
+
+h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.table-nonfluid {
+   width: auto !important;
+}
+
+.plot img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 100%;
+}
