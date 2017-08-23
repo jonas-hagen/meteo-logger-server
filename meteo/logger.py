@@ -198,9 +198,11 @@ class MeteoTerminal(serial.Serial):
         found = None
         for name, desc, hw in ports:
             try:
+                logger.debug('Try ' + name)
                 with MeteoTerminal(name) as ser:
                     answer = ser.ask('0')
                     if answer == '0':
+                        logger.debug('OK: '+name)
                         found = name
                         break
             except Exception:
@@ -301,7 +303,7 @@ def main():
     with open('/etc/meteo.yml', 'r') as f:
         config = yaml.load(f)
 
-    wd_usec = os.environ['WATCHDOG_USEC']
+    wd_usec = os.environ.get('WATCHDOG_USEC', None)
 
     if wd_usec and float(wd_usec)/1e6/2 < config['interval']:
         logger.warning('Watchdog is set to less than half the polling interval.')
