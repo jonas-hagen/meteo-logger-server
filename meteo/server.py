@@ -187,6 +187,7 @@ def api_meteo_latest(seconds=0):
     return api_response(data)
 
 
+@app.route('/')
 @app.route('/<option>')
 def page_root(option=''):
     latest = meteo_latest()
