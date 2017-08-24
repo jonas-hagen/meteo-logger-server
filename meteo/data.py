@@ -72,9 +72,11 @@ def reduce(df, minmax=False):
         df2['air_temperature_min'] = df_min['air_temperature']
         df2['rel_humidity_min'] = df_min['rel_humidity']
         df2['air_pressure_min'] = df_min['air_pressure']
+        df2['rain_intensity_min'] = df_min['rain_intensity']
         df2['air_temperature_max'] = df_max['air_temperature']
         df2['rel_humidity_max'] = df_max['rel_humidity']
         df2['air_pressure_max'] = df_max['air_pressure']
+        df2['rain_intensity_max'] = df_max['rain_intensity']
 
     # wind direction is special
     dir_avg = df['wind_dir_avg'].apply(np.deg2rad)

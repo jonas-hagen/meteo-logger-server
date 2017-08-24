@@ -40,7 +40,7 @@ units = {
     'wind_dir_min': 'deg',
     'wind_dir_max': 'deg',
     'rain_duration': 's',
-    'rain_intesity': 'mm/h',
+    'rain_intensity': 'mm/h',
     'rain_accumulation': 'mm',
     'rain_peek_intensity': 'mm',
     'heating_temperature': '°C',

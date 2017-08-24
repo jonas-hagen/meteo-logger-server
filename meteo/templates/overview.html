@@ -28,6 +28,10 @@
         <td><span class="name">Wind</span></td>
         <td><span class="value">{{ "{:.1f}".format(latest.wind_speed_avg) }}&nbsp;{{ units.wind_speed }}</span></td>
     </tr>
+    <tr>
+        <td><span class="name">Rain</span></td>
+        <td><span class="value">{{ "{:.1f}".format(latest.rain_intensity) }}&nbsp;{{ units.rain_intensity }}</span></td>
+    </tr>
 </table>
 
 
@@ -67,6 +71,12 @@
         <td><span class="value">{{ "{:.1f}".format(last_day.wind_speed_min) }}&nbsp;{{ units.wind_speed }}</span></td>
         <td><span class="value">{{ "{:.1f}".format(last_day.wind_speed_max) }}&nbsp;{{ units.wind_speed }}</span></td>
     </tr>
+    <tr>
+        <td><span class="name">Rain</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.rain_intensity) }}&nbsp;{{ units.rain_intensity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.rain_intensity_min) }}&nbsp;{{ units.rain_intensity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_day.rain_intensity_max) }}&nbsp;{{ units.rain_intensity }}</span></td>
+    </tr>
 </table>
 
 
@@ -87,7 +97,7 @@
             <img src="{{ url_for('plot_day', column='wind_speed')  }}">
         </div>
         <div class="plot">
-            <img src="{{ url_for('plot_day', column='wind_dir')  }}">
+            <img src="{{ url_for('plot_day', column='rain_intensity')  }}">
         </div>
     </div>
 {% endif %}
@@ -129,6 +139,12 @@
         <td><span class="value">{{ "{:.1f}".format(last_week.wind_speed_min) }}&nbsp;{{ units.wind_speed }}</span></td>
         <td><span class="value">{{ "{:.1f}".format(last_week.wind_speed_max) }}&nbsp;{{ units.wind_speed }}</span></td>
     </tr>
+    <tr>
+        <td><span class="name">Rain</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.rain_intensity) }}&nbsp;{{ units.rain_intensity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.rain_intensity_min) }}&nbsp;{{ units.rain_intensity }}</span></td>
+        <td><span class="value">{{ "{:.1f}".format(last_week.rain_intensity_max) }}&nbsp;{{ units.rain_intensity }}</span></td>
+    </tr>
 </table>
 
 
@@ -149,7 +165,7 @@
             <img src="{{ url_for('plot_week', column='wind_speed')  }}">
         </div>
         <div class="plot">
-            <img src="{{ url_for('plot_week', column='wind_dir')  }}">
+            <img src="{{ url_for('plot_week', column='rain_intensity')  }}">
         </div>
     </div>
 {% endif %}

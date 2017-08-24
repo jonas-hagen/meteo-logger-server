@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='meteo',
-      version='1.0',
+      version='1.1',
       description='Meteo logger and server.',
       author='Jonas Hagen',
       author_email='jonas.hagen@iap.unibe.ch',
