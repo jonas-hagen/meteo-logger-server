@@ -6,11 +6,10 @@ Simple logger and web server for the Vaisala WXT 536 meteo station.
 
 This has been written to be installed on a small platform (like RasberryPi)
 which is more or less dedicated to logging and providing meteo data.
-The install precedure is quite a hack and is not very user friendly.
+The install procedure is quite a hack and is not very user friendly.
 
-The flask development server is used to provide the web page.
-This means that this server should only be started in a trusted network,
-not reachable from the outside.
+The gunicorn server is used to provide the flask app, supervised by systemd.
+A proxy like ngix is strongly recommended but not necessary.
 
 ## Components
 
@@ -18,7 +17,9 @@ not reachable from the outside.
   * ``logger.py`` for logging meteo data.
     This script is meant to be started by systemd only.
   * ``data.py`` helper functions to read and average csv data.
-  * ``server.py`` The server for API endpoints and webpage.
+  * ``server.py`` The server for API endpoints and web page.
+  * ``gunicorn_config.py`` Configurator for the gunicorn server reads
+     the ``/etc/meteo.yml`` config file.
 * Systemd service files, which will go to ``/etc/systemd/system/``:
   * ``meteologger.service`` and
   * ``meteoserver.service``.
@@ -39,6 +40,7 @@ not reachable from the outside.
   * matplotlib
   * flask
   * flask-caching
+  * gunicorn
 
  Installation of numpy, matplotlib and pandas via pip can take a long
  time on a RasberryPi.

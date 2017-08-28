@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='meteo',
-      version='1.1',
+      version='1.2',
       description='Meteo logger and server.',
       author='Jonas Hagen',
       author_email='jonas.hagen@iap.unibe.ch',
@@ -13,6 +13,7 @@ setup(name='meteo',
           'matplotlib>=1.4.0',
           'flask>=0.10.1',
           'flask-caching>=1.3.0',
+          'gunicorn',
           'systemd>=0.10.0',
           'dicttoxml',
           'sqlalchemy>=1.1.0',
