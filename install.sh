@@ -6,7 +6,7 @@ cp -n meteo.default.yml /etc/meteo.yml
 cp meteologger.service /etc/systemd/system/
 cp meteoserver.service /etc/systemd/system/
 
-pip install . --upgrade
+pip3 install . --upgrade
 
 systemctl enable meteologger.service
 systemctl start meteologger.service
