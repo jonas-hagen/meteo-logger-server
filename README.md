@@ -2,6 +2,13 @@
 
 Simple logger and web server for the Vaisala WXT 536 meteo station.
 
+Features:
+
+* Read WXT meteo data from the weather station
+* Store the meteo data in CSV files
+* Live upload the data to a mysql/postgresql database
+* Present a nice [web interface](https://user-images.githubusercontent.com/2494894/51984337-61273100-249b-11e9-9e9a-f95f587a98e4.png) with plots.
+
 ## Disclaimer
 
 This has been written to be installed on a small platform (like RasberryPi)
