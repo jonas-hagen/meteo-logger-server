@@ -39,6 +39,7 @@ A proxy like ngix is strongly recommended but not necessary.
 
 * System dependencies:
   * systemd
+  * libsystemd-dev
   * Python 3
 
 
@@ -54,7 +55,7 @@ A proxy like ngix is strongly recommended but not necessary.
 
 ## Installation
 
-Run the ``install.sh`` as super user. Or copy paste the commands one by one.
+Run ``sudo install.sh`` or copy paste the commands one by one.
 
 ## Managing the services
 
