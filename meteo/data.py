@@ -4,12 +4,18 @@ from datetime import datetime, timedelta
 import os
 import glob
 
+def coerce_tz(dt):
+    try:
+        dt = dt.tz_convert('UTC')
+    except TypeError:
+        dt = dt.tz_localize('UTC')
+    return dt
 
 def read_csv(path):
     return pd.read_csv(path, index_col='time', parse_dates=['time'])
 
 
-def read_data(path, since=None):
+def read_data(path, since):
     """
     Read meteo data from csv files.
     :param path: Path to the csv files.
@@ -18,6 +24,7 @@ def read_data(path, since=None):
     """
     pattern = os.path.join(path, 'meteo_????-??-??.csv')
     files = sorted(list(glob.glob(pattern)))
+    since = coerce_tz(pd.to_datetime(since))
 
     if files:
         df = read_csv(files.pop())
