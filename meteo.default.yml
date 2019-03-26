@@ -10,15 +10,20 @@ baudrate: 19200
 # Setup for meteo station
 # setup: []  # No setup
 # Each setting is tested by querying current state and sending the settings if needed.
+# For the WXT520, the settings need to be split into several chunks.
+# Page numbers refer to WXT530 manual.
 setup:
   # Settings, page 60
   - '0XU,A=0,M=P,T=0,C=2,I=0,B=19200,D=8,P=N,S=1,L=20'
   # Wind, page 107
-  - '0WU,R=11111111&11111111,I=60,A=60,G=1,U=M,D=0,N=W,F=4'
+  - '0WU,R=11111111&11111111'
+  - '0WU,I=60,A=60,G=1,U=M,D=0,N=W,F=4'
   # Temperature, page 113
-  - '0TU,R=11111111&11111111,I=60,P=H,T=C,N=T'
+  - '0TU,R=11111111&11111111'
+  - '0TU,I=60,P=H'
   # Precipitation, page 117
-  - '0RU,R=11111111&11111111,I=60,U=M,S=M,M=T,Z=M'
+  - '0RU,R=11111111&11111111'
+  - '0RU,I=60,U=M,S=M,M=T,Z=M'
 
 # Poll interval in seconds.
 interval: 60
