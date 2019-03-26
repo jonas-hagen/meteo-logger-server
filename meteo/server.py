@@ -158,6 +158,9 @@ def meteo_latest(seconds=0, minmax=False):
     now = datetime.utcnow()
 
     df = md.read_data(config['target'], now-timespan)
+    if df is None:
+        return None
+
     if seconds > config['interval']:
         first = now - timespan
         last = now

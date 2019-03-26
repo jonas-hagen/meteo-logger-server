@@ -19,12 +19,13 @@ def read_data(path, since=None):
     pattern = os.path.join(path, 'meteo_????-??-??.csv')
     files = sorted(list(glob.glob(pattern)))
 
-    df = read_csv(files.pop())
-    while df.index.min() > since and files:
-        df2 = read_csv(files.pop())
-        df = pd.concat([df, df2])
-
-    return df.sort_index()
+    if files:
+        df = read_csv(files.pop())
+        while df.index.min() > since and files:
+            df2 = read_csv(files.pop())
+            df = pd.concat([df, df2])
+        return df.sort_index()
+    return None
 
 
 def resample(df, freq='10min'):
