@@ -227,11 +227,11 @@ def create_db_table(conn, table):
 def meteo_logger(config):
     if config['serial'] == 'auto':
         port = MeteoTerminal.find_station()
-        if port is None:
-            logger.error('No meteo station found. Specify port in config file.')
-            exit(1)
     else:
         port = config['serial']
+    if port is None:
+        logger.error('No meteo station found. Specify port in config file.')
+        exit(1)
 
     db_engine = None
     db_table = None
