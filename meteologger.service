@@ -6,8 +6,8 @@ After=syslog.target
 Type=simple
 WorkingDirectory=/root/
 ExecStart=/usr/local/bin/logger.py
-StandardOutput=null
-StandardError=null
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target

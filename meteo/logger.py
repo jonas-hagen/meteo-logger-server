@@ -15,8 +15,9 @@ from serial.tools import list_ports
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig()
 logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
 
 FIELDS = OrderedDict([
     ('time', 'time'),
