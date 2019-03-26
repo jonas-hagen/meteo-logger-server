@@ -13,12 +13,11 @@ import sqlalchemy as sqa
 import serial
 from serial.tools import list_ports
 
-from systemd import journal, daemon
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig()
 logger = logging.getLogger()
-logger.addHandler(journal.JournaldLogHandler())
+logger.setLevel(logging.DEBUG)
 
 FIELDS = OrderedDict([
     ('time', 'time'),
@@ -229,11 +228,11 @@ def create_db_table(conn, table):
 def meteo_logger(config):
     if config['serial'] == 'auto':
         port = MeteoTerminal.find_station()
-        if port is None:
-            logger.error('No meteo station found. Specify port in config file.')
-            exit(1)
     else:
         port = config['serial']
+    if port is None:
+        logger.error('No meteo station found. Specify port in config file.')
+        exit(1)
 
     db_engine = None
     db_table = None
@@ -269,7 +268,7 @@ def meteo_logger(config):
 
                 # Store to database
                 if db_engine is not None:
-                    with db_engine.connect() as conn:
+                   with db_engine.connect() as conn:
                         conn.execute(db_table.insert(), **data)
 
                 if (now + timedelta(seconds=interval)).day > now.day:
@@ -281,9 +280,6 @@ def meteo_logger(config):
 
                     # Housekeeping
                     delete_log_files_if_needed(output_dir, config['max_files'])
-
-                # Systemd watchdog
-                daemon.notify(daemon.Notification.WATCHDOG)
 
                 # Time
                 if datetime.utcnow() - now >= timedelta(seconds=interval):
@@ -302,17 +298,8 @@ def meteo_logger(config):
 def main():
     with open('/etc/meteo.yml', 'r') as f:
         config = yaml.load(f)
-
-    wd_usec = os.environ.get('WATCHDOG_USEC', None)
-
-    if wd_usec and float(wd_usec)/1e6/2 < config['interval']:
-        logger.warning('Watchdog is set to less than half the polling interval.')
-
     meteo_logger(config)
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    except Exception as e:
-        logger.error(str(e))
+    main()

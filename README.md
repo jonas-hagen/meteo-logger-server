@@ -38,9 +38,8 @@ A proxy like ngix is strongly recommended but not necessary.
 ## Requirements
 
 * System dependencies:
-  * systemd
-  * libsystemd-dev
   * Python 3
+  * systemd (optional)
 
 
 * Most important python dependencies (install with pip):
@@ -57,7 +56,35 @@ A proxy like ngix is strongly recommended but not necessary.
 
 Run ``sudo install.sh`` or copy paste the commands one by one.
 
-## Managing the services
+## Debugging / Managing the services
+
+After installation, start the logger in the foreground and adjust config file `/etc/meteo.yml` as needed:
+
+```
+sudo /usr/local/bin/logger.py
+```
+
+If the `logger.py` runs smoothly, abort it with 'Ctrl-C' and start it as a service:
+
+```
+sudo systemctl start meteologger.service
+```
+
+Check the log file:
+
+```
+sudo journalctl -fu meteologger.service
+```
+
+Then, start and check the server in the same way:
+```
+sudo systemctl start meteoserver.service
+sudo journalctl -fu meteoserver.service
+```
+
+Now visit the webpage: http://yourraspi:8080
+
+### Summary
 
 * Start / stop / status:
   * ``sudo systemctl {start|stop|restart|status} meteologger.service``
