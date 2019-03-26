@@ -38,9 +38,8 @@ A proxy like ngix is strongly recommended but not necessary.
 ## Requirements
 
 * System dependencies:
-  * systemd
-  * libsystemd-dev
   * Python 3
+  * systemd (optional)
 
 
 * Most important python dependencies (install with pip):

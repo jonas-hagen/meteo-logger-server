@@ -9,11 +9,5 @@ ExecStart=/usr/local/bin/logger.py
 StandardOutput=null
 StandardError=null
 
-WatchdogSec=120s
-Restart=on-failure
-StartLimitInterval=5min
-StartLimitBurst=4
-# StartLimitAction=reboot-force
-
 [Install]
 WantedBy=multi-user.target

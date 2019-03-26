@@ -13,12 +13,10 @@ import sqlalchemy as sqa
 import serial
 from serial.tools import list_ports
 
-from systemd import journal, daemon
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger()
-logger.addHandler(journal.JournaldLogHandler())
 
 FIELDS = OrderedDict([
     ('time', 'time'),
@@ -269,7 +267,7 @@ def meteo_logger(config):
 
                 # Store to database
                 if db_engine is not None:
-                    with db_engine.connect() as conn:
+                   with db_engine.connect() as conn:
                         conn.execute(db_table.insert(), **data)
 
                 if (now + timedelta(seconds=interval)).day > now.day:
@@ -281,9 +279,6 @@ def meteo_logger(config):
 
                     # Housekeeping
                     delete_log_files_if_needed(output_dir, config['max_files'])
-
-                # Systemd watchdog
-                daemon.notify(daemon.Notification.WATCHDOG)
 
                 # Time
                 if datetime.utcnow() - now >= timedelta(seconds=interval):
@@ -302,12 +297,6 @@ def meteo_logger(config):
 def main():
     with open('/etc/meteo.yml', 'r') as f:
         config = yaml.load(f)
-
-    wd_usec = os.environ.get('WATCHDOG_USEC', None)
-
-    if wd_usec and float(wd_usec)/1e6/2 < config['interval']:
-        logger.warning('Watchdog is set to less than half the polling interval.')
-
     meteo_logger(config)
 
 
