@@ -107,6 +107,8 @@ def plot_series(period, column):
     last = now
 
     df = md.read_data(config['target'], now - timespan)
+    if df is None:
+        abort(503)
     df = df[slice(first, last)]
 
     max_col = None
@@ -187,6 +189,8 @@ def meteo_latest(seconds=0, minmax=False):
 @app.route('/latest/<int:seconds>')
 def api_meteo_latest(seconds=0):
     data = meteo_latest(seconds)
+    if data is None:
+        abort(503)
     return api_response(data)
 
 
@@ -194,6 +198,8 @@ def api_meteo_latest(seconds=0):
 @app.route('/<option>')
 def page_root(option=''):
     latest = meteo_latest()
+    if latest is None:
+        abort(503)
     context = {
         'name': config['name'],
         'latest': latest,
