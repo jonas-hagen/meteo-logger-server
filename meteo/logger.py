@@ -263,7 +263,7 @@ def meteo_logger(config):
 
                 # Write csv
                 day = now.date()
-                path = pathlib.Path(output_dir) / ('meteo_' + str(day) + '.csv')
+                path = pathlib.Path(output_dir) / str(now.year) / ('meteo_' + str(day) + '.csv')
                 append_csv_row(path, data)
 
                 # Store to database
